@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-carbon-950: #050505;
+  --color-carbon-900: #0a0a0a;
+  --color-carbon-800: #0f0f0f;
+  --color-carbon-700: #161616;
+  --color-carbon-600: #1e1e1e;
+  --color-carbon-500: #272727;
+  --color-carbon-400: #333333;
+  --color-carbon-300: #4a4a4a;
+  --color-carbon-200: #6b6b6b;
+  --color-carbon-100: #a0a0a0;
+
+  --color-red-600: #b30000;
+  --color-red-500: #e10600;
+  --color-red-400: #ff2318;
+  --color-red-300: #ff6b64;
+
+  --color-yellow-500: #d4a800;
+  --color-yellow-400: #ffd600;
+  --color-yellow-300: #ffe440;
+
+  --font-display: "Barlow Condensed", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background-color: #0a0a0a;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #0f0f0f; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #e10600; }
+
+/* ── Selection ── */
+::selection { background: rgba(225,6,0,0.35); color: #fff; }
+
+/* ── GSAP will-change hints ── */
+.anim-card, .anim-hero, .anim-bar { will-change: transform, opacity; }
+
+/* ── Carbon texture overlay ── */
+.carbon-bg {
+  background-color: #0f0f0f;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.012) 2px,
+      rgba(255,255,255,0.012) 4px
+    );
+}
+
+/* ── Red glow ── */
+.red-glow { box-shadow: 0 0 24px rgba(225,6,0,0.25); }
+.red-glow-sm { box-shadow: 0 0 12px rgba(225,6,0,0.2); }
+
+/* ── Number display ── */
+.num { font-family: var(--font-mono); }
+
+/* ── Clip diagonal ── */
+.clip-diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+}
+
+/* ── Animated underline ── */
+.animated-link {
+  position: relative;
+}
+.animated-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 0; height: 2px;
+  background: #e10600;
+  transition: width 0.25s ease;
+}
+.animated-link:hover::after { width: 100%; }
+
+/* ── Page fade transition ── */
+.page-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+/* ── Pulse dot ── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+.pulse-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
+
+/* ── Ticker tape ── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-inner { animation: ticker 30s linear infinite; }
+.ticker-inner:hover { animation-play-state: paused; }

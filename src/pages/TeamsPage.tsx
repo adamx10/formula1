@@ -29,7 +29,7 @@ export function TeamsPage() {
 
           return (
             <Link key={team.id} to={`/teams/${team.id}`}
-              className="team-card group relative rounded-sm border border-carbon-500 bg-carbon-800 overflow-hidden hover:border-red-500/50 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40">
+              className="team-card group relative rounded-sm border border-carbon-500 bg-carbon-800 overflow-hidden hover:border-blue-500/50 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40">
               {/* gradient top border */}
               <div className="absolute inset-x-0 top-0 h-0.5"
                 style={{ background: `linear-gradient(90deg, ${team.primaryColor}, ${team.secondaryColor})` }} />
@@ -41,7 +41,7 @@ export function TeamsPage() {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-carbon-200">{team.base}</p>
-                    <h3 className="font-display text-xl font-black uppercase leading-tight text-white group-hover:text-red-400 transition-colors">
+                    <h3 className="font-display text-xl font-black uppercase leading-tight text-white group-hover:text-blue-400 transition-colors">
                       {team.shortName}
                     </h3>
                   </div>

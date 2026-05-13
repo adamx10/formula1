@@ -21,7 +21,7 @@ export function DriverDetailPage() {
     return (
       <div className="text-center py-20">
         <p className="text-carbon-200">Driver not found.</p>
-        <Link to="/drivers" className="mt-4 inline-block text-red-500 hover:text-red-400 text-sm font-semibold">← Back to Drivers</Link>
+        <Link to="/drivers" className="mt-4 inline-block text-blue-500 hover:text-blue-400 text-sm font-semibold">← Back to Drivers</Link>
       </div>
     );
   }
@@ -73,7 +73,7 @@ export function DriverDetailPage() {
       {/* Info */}
       <div className="detail-block grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
         <div className="rounded-sm border border-carbon-500 bg-carbon-800 p-4">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">Profile</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-3">Profile</p>
           <div className="space-y-2 text-sm">
             {[
               ['Date of Birth', dob],
@@ -89,11 +89,11 @@ export function DriverDetailPage() {
           </div>
         </div>
         <div className="rounded-sm border border-carbon-500 bg-carbon-800 p-4">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">Team</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-3">Team</p>
           <Link to={`/teams/${team.id}`} className="group">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-4 h-4 rounded-full" style={{ backgroundColor: team.primaryColor }} />
-              <span className="font-semibold text-white group-hover:text-red-400 transition-colors">{team.name}</span>
+              <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">{team.name}</span>
             </div>
             <div className="space-y-2 text-sm">
               {[
@@ -115,13 +115,13 @@ export function DriverDetailPage() {
       {/* Teammates */}
       {teammates.length > 0 && (
         <div className="detail-block rounded-sm border border-carbon-500 bg-carbon-800 p-4">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">Teammate</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-3">Teammate</p>
           {teammates.map((tm) => (
             <Link key={tm.id} to={`/drivers/${tm.id}`}
-              className="flex items-center gap-3 hover:text-red-400 transition-colors group">
+              className="flex items-center gap-3 hover:text-blue-400 transition-colors group">
               <span className="text-xl">{tm.flag}</span>
               <div className="flex-1">
-                <p className="font-semibold text-white group-hover:text-red-400 text-sm">{tm.firstName} {tm.lastName}</p>
+                <p className="font-semibold text-white group-hover:text-blue-400 text-sm">{tm.firstName} {tm.lastName}</p>
                 <p className="text-xs text-carbon-200">#{tm.number} · P{tm.standing} · {tm.points ?? 0} pts</p>
               </div>
             </Link>

@@ -16,7 +16,7 @@ export function Skeleton({ rows = 1, className = '', height = 'h-12' }: Skeleton
 
 export function ErrorState({ message }: { message: string }) {
   return (
-    <div className="flex items-center gap-3 rounded-sm border border-red-500/30 bg-red-500/8 px-4 py-3 text-sm text-red-400">
+    <div className="flex items-center gap-3 rounded-sm border border-blue-500/30 bg-blue-500/8 px-4 py-3 text-sm text-blue-400">
       <span className="text-lg">⚠</span>
       <span>{message}</span>
     </div>

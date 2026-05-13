@@ -9,7 +9,7 @@ export function SectionHeader({ label, title, subtitle, action }: SectionHeaderP
   return (
     <div className="mb-6 flex items-end justify-between">
       <div>
-        <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-red-500">{label}</p>
+        <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-blue-500">{label}</p>
         <h2 className="font-display text-3xl font-black uppercase leading-none tracking-tight text-white">{title}</h2>
         {subtitle && <p className="mt-1 text-sm text-carbon-100">{subtitle}</p>}
       </div>

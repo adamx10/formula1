@@ -19,7 +19,7 @@ export function TeamDetailPage() {
     return (
       <div className="text-center py-20">
         <p className="text-carbon-200">Team not found.</p>
-        <Link to="/teams" className="mt-4 inline-block text-red-500 text-sm font-semibold">← Back to Teams</Link>
+        <Link to="/teams" className="mt-4 inline-block text-blue-500 hover:text-blue-400 text-sm font-semibold">← Back to Teams</Link>
       </div>
     );
   }
@@ -58,7 +58,7 @@ export function TeamDetailPage() {
       {/* Info + Drivers */}
       <div className="detail-block grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
         <div className="rounded-sm border border-carbon-500 bg-carbon-800 p-4">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">Technical</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-3">Technical</p>
           <div className="space-y-2 text-sm">
             {[['Chassis', team.chassis], ['Power Unit', team.powerUnit], ['Base', team.base]].map(([k, v]) => (
               <div key={k} className="flex justify-between gap-2">
@@ -75,14 +75,14 @@ export function TeamDetailPage() {
         </div>
 
         <div className="rounded-sm border border-carbon-500 bg-carbon-800 p-4">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">Drivers</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-3">Drivers</p>
           <div className="space-y-3">
             {drivers.map((d) => (
               <Link key={d.id} to={`/drivers/${d.id}`}
                 className="flex items-center gap-3 group">
                 <span className="text-2xl">{d.flag}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-white group-hover:text-red-400 transition-colors">
+                  <p className="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors">
                     {d.firstName} {d.lastName} {d.isChampion ? '⭐' : ''}
                   </p>
                   <p className="text-xs text-carbon-200">#{d.number} · P{d.standing} · {d.points ?? 0} pts</p>

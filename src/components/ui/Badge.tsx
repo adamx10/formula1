@@ -1,4 +1,4 @@
-type BadgeVariant = 'red' | 'yellow' | 'green' | 'muted' | 'outline';
+type BadgeVariant = 'blue' | 'yellow' | 'green' | 'muted' | 'outline';
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface BadgeProps {
 }
 
 const VARIANTS: Record<BadgeVariant, string> = {
-  red:     'bg-red-500/15 text-red-400 border-red-500/30',
+  blue:    'bg-blue-500/15 text-blue-400 border-blue-500/30',
   yellow:  'bg-yellow-400/15 text-yellow-400 border-yellow-400/30',
   green:   'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
   muted:   'bg-carbon-500 text-carbon-100 border-carbon-400',

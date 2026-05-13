@@ -27,7 +27,7 @@ export function DriversPage() {
           const team = TEAMS.find((t) => t.id === d.teamId);
           return (
             <Link key={d.id} to={`/drivers/${d.id}`}
-              className="driver-card group relative rounded-sm border border-carbon-500 bg-carbon-800 overflow-hidden hover:border-red-500/50 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40">
+              className="driver-card group relative rounded-sm border border-carbon-500 bg-carbon-800 overflow-hidden hover:border-blue-500/50 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40">
               {/* team color stripe */}
               <div className="absolute inset-x-0 top-0 h-0.5" style={{ backgroundColor: team?.primaryColor ?? '#333' }} />
               {/* team color glow */}
@@ -52,7 +52,7 @@ export function DriversPage() {
 
                 <div className="mb-3">
                   <p className="text-xs text-carbon-200">{d.firstName}</p>
-                  <p className="font-display text-xl font-black uppercase leading-tight text-white group-hover:text-red-400 transition-colors">
+                  <p className="font-display text-xl font-black uppercase leading-tight text-white group-hover:text-blue-400 transition-colors">
                     {d.lastName}
                   </p>
                   {d.isChampion && <Badge variant="yellow" className="mt-1">⭐ Reigning Champion</Badge>}

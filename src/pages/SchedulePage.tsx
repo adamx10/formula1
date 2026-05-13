@@ -13,7 +13,7 @@ function RaceRow({ race, isNext }: { race: (typeof CALENDAR_2026)[0]; isNext: bo
 
   return (
     <div className={`anim-card flex items-center gap-4 rounded-sm border px-4 py-3.5 transition-all
-      ${isNext ? 'border-red-500/40 bg-red-500/5' : past ? 'border-carbon-500/50 bg-carbon-800/40 opacity-50' : 'border-carbon-500 bg-carbon-800 hover:border-carbon-400'}`}>
+      ${isNext ? 'border-blue-500/40 bg-blue-500/5' : past ? 'border-carbon-500/50 bg-carbon-800/40 opacity-50' : 'border-carbon-500 bg-carbon-800 hover:border-carbon-400'}`}>
       <span className="num text-xs font-bold text-carbon-300 w-6 text-center shrink-0">R{race.round}</span>
       <span className="text-xl shrink-0">{race.flag}</span>
       <div className="flex-1 min-w-0">
@@ -21,7 +21,7 @@ function RaceRow({ race, isNext }: { race: (typeof CALENDAR_2026)[0]; isNext: bo
           <span className={`text-sm font-semibold ${past ? 'text-carbon-100' : 'text-white'}`}>
             {race.shortName} GP
           </span>
-          {isNext && <Badge variant="red">Next</Badge>}
+          {isNext && <Badge variant="blue">Next</Badge>}
           {race.hasSprint && <Badge variant="outline">Sprint</Badge>}
           {past && <Badge variant="muted">Done</Badge>}
         </div>
@@ -41,9 +41,9 @@ function NextRaceCountdown() {
   if (!next) return null;
 
   return (
-    <div className="mb-6 rounded-sm border border-red-500/30 bg-carbon-800 p-5">
-      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-500 mb-1">
-        <span className="pulse-dot inline-block mr-1.5 h-1.5 w-1.5 rounded-full bg-red-500" />
+    <div className="mb-6 rounded-sm border border-blue-500/30 bg-carbon-800 p-5">
+      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-500 mb-1">
+        <span className="pulse-dot inline-block mr-1.5 h-1.5 w-1.5 rounded-full bg-blue-500" />
         Countdown · Round {next.round}
       </p>
       <h2 className="font-display text-2xl font-black uppercase text-white mb-3">{next.name}</h2>

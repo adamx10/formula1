@@ -226,7 +226,7 @@ export function HomePage() {
             loading="lazy"
             className="spotlight-img absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0  from-carbon-900 lg:from-transparent lg:to-carbon-800" />
+          <div className="absolute inset-0 from-carbon-900  lg:from-transparent lg:to-carbon-800" />
         </div>
         <div className="spotlight-content lg:col-span-3 p-10 flex flex-col justify-center">
           <p className="text-[10px] font-bold uppercase tracking-widest text-yellow-400 mb-3 flex items-center gap-2">

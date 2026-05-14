@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
 
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-blue-500/30 bg-carbon-950 py-8 px-6 text-center">
       <div className="mx-auto max-w-7xl flex flex-col items-center gap-4">
-        <Logo size="sm" />
+        <Link to="/" className="transition-transform hover:scale-105 active:scale-95">
+          <Logo size="sm" />
+        </Link>
         
         <p className="text-[11px] text-carbon-400 font-medium uppercase tracking-[0.2em]">
           © 2026 Pitlane - Built with speed by <span className="text-white">Adam-x10</span>

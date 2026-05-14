@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useGSAP } from '../../hooks/useGSAP';
 import gsap from 'gsap';
 import { Logo } from '../ui/Logo';
@@ -48,9 +48,9 @@ export function Sidebar() {
       {/* ── Desktop sidebar ── */}
       <aside ref={sidebarRef} className="hidden lg:flex flex-col fixed inset-y-0 left-0 w-56 z-40 border-r border-carbon-500 bg-carbon-900 shadow-2xl">
         {/* Logo */}
-        <div className="px-5 py-6 border-b border-carbon-500 bg-carbon-950">
+        <Link to="/" className="px-5 py-6 border-b border-carbon-500 bg-carbon-950 transition-colors hover:bg-carbon-900">
           <Logo />
-        </div>
+        </Link>
 
         {/* Nav */}
         <nav className="flex-1 px-3 py-6 space-y-1">

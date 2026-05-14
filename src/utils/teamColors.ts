@@ -7,8 +7,9 @@ export const TEAM_COLORS: Record<string, { primary: string; secondary: string }>
   alpine:          { primary: '#FF87BC', secondary: '#0093CC' },
   williams:        { primary: '#64C4FF', secondary: '#1C2DC8' },
   rb:              { primary: '#6692FF', secondary: '#1B4B8B' },
-  kick_sauber:     { primary: '#52E252', secondary: '#000000' },
+  sauber:          { primary: '#52E252', secondary: '#000000' },
   haas:            { primary: '#B6BABD', secondary: '#E8002D' },
+  cadillac:        { primary: '#B09060', secondary: '#0A2472' },
   // Legacy / fallback
   renault:         { primary: '#FFF500', secondary: '#000000' },
   force_india:     { primary: '#FF80C7', secondary: '#FF5F0F' },

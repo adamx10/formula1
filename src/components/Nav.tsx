@@ -14,7 +14,7 @@ export function Nav({ active, onChange }: NavProps) {
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1">
             <span className="text-2xl font-black tracking-tighter text-white">F1</span>
-            <span className="rounded bg-[#0077ff] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
+            <span className="rounded bg-blue-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white shadow-[0_0_10px_#0077ff44]">
               LIVE
             </span>
           </div>
@@ -33,7 +33,7 @@ export function Nav({ active, onChange }: NavProps) {
               className={[
                 'rounded-lg px-3 py-1.5 text-xs font-semibold transition-all duration-200',
                 active === tab
-                  ? 'bg-[#0077ff] text-white shadow-lg shadow-blue-600/30'
+                  ? 'bg-blue-500 text-white shadow-lg shadow-blue-600/30'
                   : 'text-white/50 hover:text-white',
               ].join(' ')}
             >

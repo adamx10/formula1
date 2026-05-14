@@ -73,9 +73,10 @@ export function LastRace() {
         </h3>
         <div className="grid grid-cols-3 gap-3">
           {/* Reorder: 2nd, 1st, 3rd */}
-          <PodiumCard result={podium[1]} />
-          <PodiumCard result={podium[0]} highlight />
-          <PodiumCard result={podium[2]} />
+          {podium[1] && <PodiumCard result={podium[1]} />}
+          {podium[0] && <PodiumCard result={podium[0]} highlight />}
+          {podium[2] && <PodiumCard result={podium[2]} />}
+          {!podium[0] && <div className="col-span-3 py-8 text-center text-sm text-white/20">Podium data pending...</div>}
         </div>
       </div>
 

@@ -1,7 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
+import { useSmoothScroll } from '../../hooks/useSmoothScroll';
 
 export function RootLayout() {
+  useSmoothScroll();
+
   return (
     <div className="min-h-screen bg-carbon-900">
       <Sidebar />

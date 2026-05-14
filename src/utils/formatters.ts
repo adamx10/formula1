@@ -32,12 +32,12 @@ export function ordinal(n: number | string): string {
 
 export function flagEmoji(nationality: string): string {
   const map: Record<string, string> = {
-    British: '🇬🇧', Dutch: '🇳🇱', Monegasque: '🇲🇨', Spanish: '🇪🇸',
+    British: '🇬🇧', Dutch: '🇳🇱', Monégasque: '🇲🇨', Spanish: '🇪🇸',
     Mexican: '🇲🇽', Australian: '🇦🇺', Canadian: '🇨🇦', German: '🇩🇪',
     Finnish: '🇫🇮', French: '🇫🇷', Danish: '🇩🇰', Chinese: '🇨🇳',
     Thai: '🇹🇭', Japanese: '🇯🇵', American: '🇺🇸', Italian: '🇮🇹',
     Argentine: '🇦🇷', Brazilian: '🇧🇷', Polish: '🇵🇱', Swiss: '🇨🇭',
-    New_Zealander: '🇳🇿', Austrian: '🇦🇹', Belgian: '🇧🇪',
+    'New Zealander': '🇳🇿', Austrian: '🇦🇹', Belgian: '🇧🇪',
   };
   return map[nationality] ?? '🏁';
 }

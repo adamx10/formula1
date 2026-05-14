@@ -1,20 +1,13 @@
+import { useRef } from 'react';
 import { useFetch } from '../hooks/useFetch';
 import { useCountdown } from '../hooks/useCountdown';
-import { formatRaceDate, pad2 } from '../utils/formatters';
+import { formatRaceDate, pad2, flagEmoji } from '../utils/formatters';
 import { Skeleton, ErrorBanner } from './Skeleton';
+import { useGSAP } from '../hooks/useGSAP';
+import gsap from 'gsap';
 import type { RaceScheduleResponse, Race } from '../types/f1';
 
 const URL = 'https://api.jolpica.com/ergast/f1/current.json';
-
-const COUNTRY_FLAG: Record<string, string> = {
-  Australia: '🇦🇺', Bahrain: '🇧🇭', 'Saudi Arabia': '🇸🇦', Japan: '🇯🇵',
-  China: '🇨🇳', USA: '🇺🇸', 'United States': '🇺🇸', Italy: '🇮🇹',
-  Monaco: '🇲🇨', Canada: '🇨🇦', Spain: '🇪🇸', Austria: '🇦🇹',
-  'United Kingdom': '🇬🇧', Hungary: '🇭🇺', Belgium: '🇧🇪',
-  Netherlands: '🇳🇱', Singapore: '🇸🇬', Azerbaijan: '🇦🇿',
-  Mexico: '🇲🇽', Brazil: '🇧🇷', 'Abu Dhabi': '🇦🇪', Qatar: '🇶🇦',
-  UAE: '🇦🇪',
-};
 
 function NextRaceCountdown({ race }: { race: Race }) {
   const raceDateTime = race.time
@@ -24,20 +17,20 @@ function NextRaceCountdown({ race }: { race: Race }) {
   const { days, hours, minutes, seconds } = useCountdown(raceDateTime);
 
   return (
-    <div className="mb-6 overflow-hidden rounded-2xl border border-[#e10600]/30 bg-gradient-to-br from-[#e10600]/10 via-[#1a0000]/60 to-transparent p-5">
-      <div className="mb-1 flex items-center gap-2">
+    <div className="anim-card mb-8 overflow-hidden rounded-sm border border-blue-500/30  from-blue-500/10 via-carbon-800 to-transparent p-6 blue-glow-sm">
+      <div className="mb-2 flex items-center gap-2">
         <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#e10600] opacity-75" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-[#e10600]" />
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500" />
         </span>
-        <span className="text-xs font-semibold uppercase tracking-widest text-[#e10600]">
-          Next Race
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-500">
+          Next Round
         </span>
       </div>
-      <div className="mb-3">
-        <h2 className="text-lg font-black text-white">{race.raceName}</h2>
-        <p className="text-sm text-white/50">
-          {COUNTRY_FLAG[race.Circuit.Location.country] ?? '🏁'}{' '}
+      <div className="mb-4">
+        <h2 className="font-display text-3xl font-black uppercase text-white tracking-tight">{race.raceName}</h2>
+        <p className="text-sm text-carbon-200 mt-1">
+          {flagEmoji(race.Circuit.Location.country)}{' '}
           {race.Circuit.Location.locality}, {race.Circuit.Location.country} ·{' '}
           {formatRaceDate(race.date, race.time)}
         </p>
@@ -51,12 +44,12 @@ function NextRaceCountdown({ race }: { race: Race }) {
         ].map(({ label, value }) => (
           <div
             key={label}
-            className="flex flex-col items-center rounded-xl border border-white/10 bg-white/5 px-3 py-2 min-w-[3.5rem]"
+            className="flex flex-col items-center rounded-sm border border-carbon-500 bg-carbon-900 px-4 py-2 "
           >
-            <span className="text-2xl font-black tabular-nums text-white">
+            <span className="num text-2xl font-bold tabular-nums text-white">
               {pad2(value)}
             </span>
-            <span className="text-[10px] uppercase tracking-wider text-white/40">
+            <span className="text-[9px] uppercase tracking-widest text-carbon-400 font-bold">
               {label}
             </span>
           </div>
@@ -67,19 +60,27 @@ function NextRaceCountdown({ race }: { race: Race }) {
 }
 
 export function RaceCalendar() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const state = useFetch<RaceScheduleResponse>(URL);
 
-  if (state.status === 'loading') return <Skeleton rows={8} />;
+  useGSAP(() => {
+    if (state.status === 'success') {
+      gsap.fromTo('.calendar-row',
+        { x: -20, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.5, stagger: 0.03, ease: 'power2.out' }
+      );
+    }
+  }, { scope: containerRef, dependencies: [state.status] });
+
+  if (state.status === 'loading') return <Skeleton rows={12} />;
   if (state.status === 'error') return <ErrorBanner message={state.message} />;
 
   const races = state.data.MRData.RaceTable.Races;
   const today = new Date();
-
-  // Find the first upcoming race
   const nextRace = races.find((r) => new Date(r.date) >= today);
 
   return (
-    <div>
+    <div ref={containerRef} className="pb-12">
       {nextRace && <NextRaceCountdown race={nextRace} />}
 
       <div className="space-y-1.5">
@@ -91,61 +92,61 @@ export function RaceCalendar() {
             <div
               key={race.round}
               className={[
-                'flex items-center gap-4 rounded-xl border px-4 py-3 transition-all duration-200',
+                'calendar-row flex items-center gap-4 rounded-sm border px-4 py-3.5 transition-all duration-300 will-change-transform',
                 isNext
-                  ? 'border-[#e10600]/40 bg-[#e10600]/8 shadow-lg shadow-red-900/20'
+                  ? 'border-blue-500/40 bg-blue-500/5 shadow-lg shadow-blue-500/5'
                   : isPast
-                  ? 'border-white/5 bg-white/2 opacity-40'
-                  : 'border-white/8 bg-white/4 hover:border-white/15',
+                  ? 'border-carbon-500/50 bg-carbon-800/40 opacity-40'
+                  : 'border-carbon-500 bg-carbon-900/50 hover:border-carbon-400 hover:bg-carbon-800',
               ].join(' ')}
             >
-              {/* round number */}
-              <span className="w-6 shrink-0 text-center text-xs font-bold text-white/30">
+              <span className="w-8 shrink-0 text-center num text-xs font-bold text-carbon-400">
                 R{race.round}
               </span>
 
-              {/* flag */}
-              <span className="text-xl">
-                {COUNTRY_FLAG[race.Circuit.Location.country] ?? '🏁'}
+              <span className="text-xl shrink-0">
+                {flagEmoji(race.Circuit.Location.country)}
               </span>
 
-              {/* name + circuit */}
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <span
                     className={[
-                      'truncate text-sm font-semibold',
-                      isPast ? 'text-white/50' : 'text-white',
+                      'truncate text-sm font-bold tracking-wide uppercase',
+                      isPast ? 'text-carbon-300' : 'text-white',
                     ].join(' ')}
                   >
                     {race.raceName.replace(' Grand Prix', ' GP')}
                   </span>
                   {isNext && (
-                    <span className="shrink-0 rounded bg-[#e10600] px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+                    <span className="shrink-0 rounded-full bg-blue-500 px-2 py-0.5 text-[8px] font-black uppercase tracking-widest text-white">
                       Next
                     </span>
                   )}
                   {race.Sprint && !isPast && (
-                    <span className="shrink-0 rounded bg-purple-600/70 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+                    <span className="shrink-0 rounded-full border border-purple-500/50 px-2 py-0.5 text-[8px] font-black uppercase tracking-widest text-purple-400">
                       Sprint
                     </span>
                   )}
                 </div>
-                <div className="text-xs text-white/30">
+                <div className="text-[10px] text-carbon-400 font-medium truncate uppercase tracking-wider">
                   {race.Circuit.circuitName}
                 </div>
               </div>
 
-              {/* date */}
-              <span className="shrink-0 text-right text-xs text-white/40">
-                {formatRaceDate(race.date)}
-              </span>
+              <div className="shrink-0 text-right">
+                <p className="num text-xs font-bold text-carbon-200">
+                  {formatRaceDate(race.date)}
+                </p>
+                <p className="text-[9px] text-carbon-400 uppercase font-bold tracking-tighter">
+                  {race.Circuit.Location.locality}
+                </p>
+              </div>
 
-              {/* status dot */}
-              <span
+              <div
                 className={[
-                  'h-2 w-2 shrink-0 rounded-full',
-                  isPast ? 'bg-white/20' : isNext ? 'bg-[#e10600] shadow-sm shadow-red-500' : 'bg-white/10',
+                  'h-1.5 w-1.5 shrink-0 rounded-full',
+                  isPast ? 'bg-carbon-600' : isNext ? 'bg-blue-500 shadow-[0_0_8px_#0077ff]' : 'bg-carbon-500',
                 ].join(' ')}
               />
             </div>

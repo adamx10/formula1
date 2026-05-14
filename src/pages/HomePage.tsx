@@ -163,8 +163,8 @@ export function HomePage() {
             loading="eager"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 from-carbon-900 via-carbon-900/40 to-transparent" />
-          <div className="absolute inset-0  from-carbon-900 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-carbon-900 via-carbon-900/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-carbon-900 via-transparent to-transparent" />
         </div>
 
         <div className="relative z-10 px-6 sm:px-12 py-16 max-w-3xl">
@@ -226,7 +226,7 @@ export function HomePage() {
             loading="lazy"
             className="spotlight-img absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 from-carbon-900  lg:from-transparent lg:to-carbon-800" />
+          <div className="absolute inset-0 bg-gradient-to-t from-carbon-900 lg:bg-gradient-to-r lg:from-transparent lg:to-carbon-800" />
         </div>
         <div className="spotlight-content lg:col-span-3 p-10 flex flex-col justify-center">
           <p className="text-[10px] font-bold uppercase tracking-widest text-yellow-400 mb-3 flex items-center gap-2">

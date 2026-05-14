@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useGSAP } from '../../hooks/useGSAP';
 import gsap from 'gsap';
+import { Logo } from '../ui/Logo';
 
 const NAV = [
   { to: '/',          icon: '⬡', label: 'Home'      },
@@ -26,6 +27,20 @@ export function Sidebar() {
       { x: -20, opacity: 0 },
       { x: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: 'power2.out', delay: 0.2 }
     );
+
+    // Hover effects for nav items
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+      const hoverBg = item.querySelector('.hover-bg');
+      const icon = item.querySelector('.nav-icon');
+      
+      const tl = gsap.timeline({ paused: true });
+      tl.to(hoverBg, { opacity: 1, scale: 1, duration: 0.3, ease: 'power2.out' })
+        .to(icon, { scale: 1.1, color: '#fff', duration: 0.3, ease: 'back.out(2)' }, 0);
+      
+      item.addEventListener('mouseenter', () => tl.play());
+      item.addEventListener('mouseleave', () => tl.reverse());
+    });
   }, { scope: sidebarRef });
 
   return (
@@ -33,14 +48,8 @@ export function Sidebar() {
       {/* ── Desktop sidebar ── */}
       <aside ref={sidebarRef} className="hidden lg:flex flex-col fixed inset-y-0 left-0 w-56 z-40 border-r border-carbon-500 bg-carbon-900 shadow-2xl">
         {/* Logo */}
-        <div className="flex items-center gap-3 px-5 py-6 border-b border-carbon-500 bg-carbon-950">
-          <div className="flex items-center justify-center w-8 h-8 bg-blue-500 rounded-sm shadow-[0_0_15px_rgba(0,119,255,0.4)]">
-            <span className="font-display text-xs font-black text-white">PL</span>
-          </div>
-          <div>
-            <p className="font-display text-lg font-black uppercase tracking-widest leading-none text-white">Pitlane</p>
-            <p className="text-[9px] text-carbon-200 tracking-[0.15em] uppercase mt-0.5">F1 2026</p>
-          </div>
+        <div className="px-5 py-6 border-b border-carbon-500 bg-carbon-950">
+          <Logo />
         </div>
 
         {/* Nav */}
@@ -54,20 +63,19 @@ export function Sidebar() {
                 `nav-item group flex items-center gap-3 px-3 py-3 rounded-sm text-sm font-bold uppercase tracking-wider transition-all duration-300 relative overflow-hidden
                 ${isActive
                   ? 'bg-blue-500/10 text-white'
-                  : 'text-carbon-200 hover:text-white hover:bg-carbon-800'}`
+                  : 'text-carbon-200 hover:text-white'}`
               }
             >
               {({ isActive }) => (
                 <>
+                  <div className="hover-bg absolute inset-0 bg-blue-500/10 opacity-0 scale-95 pointer-events-none" />
                   {isActive && (
                     <span className="absolute inset-y-0 left-0 w-0.5 bg-blue-500 shadow-[0_0_8px_#0077ff]" />
                   )}
-                  <span className={`text-lg leading-none transition-transform group-hover:scale-110 ${isActive ? 'text-blue-500' : 'text-carbon-400 group-hover:text-blue-400'}`}>
+                  <span className={`nav-icon text-lg leading-none transition-transform relative z-10 ${isActive ? 'text-blue-500' : 'text-carbon-400'}`}>
                     {icon}
                   </span>
-                  <span>{label}</span>
-                  {/* Subtle hover glow effect */}
-                  <span className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors pointer-events-none" />
+                  <span className="relative z-10">{label}</span>
                 </>
               )}
             </NavLink>

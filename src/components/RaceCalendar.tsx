@@ -17,7 +17,7 @@ function NextRaceCountdown({ race }: { race: Race }) {
   const { days, hours, minutes, seconds } = useCountdown(raceDateTime);
 
   return (
-    <div className="anim-card mb-8 overflow-hidden rounded-sm border border-blue-500/30  from-blue-500/10 via-carbon-800 to-transparent p-6 blue-glow-sm">
+    <div className="anim-card mb-8 overflow-hidden rounded-sm border border-blue-500/30 bg-gradient-to-br from-blue-500/10 via-carbon-800 to-transparent p-6 blue-glow-sm">
       <div className="mb-2 flex items-center gap-2">
         <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-75" />
@@ -44,7 +44,7 @@ function NextRaceCountdown({ race }: { race: Race }) {
         ].map(({ label, value }) => (
           <div
             key={label}
-            className="flex flex-col items-center rounded-sm border border-carbon-500 bg-carbon-900 px-4 py-2 "
+            className="flex flex-col items-center rounded-sm border border-carbon-500 bg-carbon-900 px-4 py-2 min-w-[4rem]"
           >
             <span className="num text-2xl font-bold tabular-nums text-white">
               {pad2(value)}

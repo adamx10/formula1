@@ -44,7 +44,7 @@ function NextRaceCountdown({ race }: { race: Race }) {
         ].map(({ label, value }) => (
           <div
             key={label}
-            className="flex flex-col items-center rounded-sm border border-carbon-500 bg-carbon-900 px-4 py-2 "
+            className="flex flex-col items-center rounded-sm border border-carbon-500 bg-carbon-900 px-4 py-2"
           >
             <span className="num text-2xl font-bold tabular-nums text-white">
               {pad2(value)}

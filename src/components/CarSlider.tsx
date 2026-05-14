@@ -93,7 +93,7 @@ export function CarSlider() {
         {CAR_IMAGES.map((src, i) => (
           <div 
             key={i} 
-            className="group relative  w-[300px] sm:w-[500px] aspect-video overflow-hidden rounded-sm border border-carbon-500/50 transition-all duration-500 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 snap-center"
+            className="group relative w-[300px] sm:w-[500px] aspect-video overflow-hidden rounded-sm border border-carbon-500/50 transition-all duration-500 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 snap-center"
           >
             <img
               src={src}

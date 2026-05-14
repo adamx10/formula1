@@ -7,6 +7,10 @@ export interface Countdown {
   seconds: number;
 }
 
+/**
+ * A custom hook that calculates the time remaining until a target date.
+ * Optimized to avoid redundant re-renders by comparing delta values.
+ */
 export function useCountdown(targetDate: string | undefined): Countdown {
   const calculateDelta = useCallback((): Countdown => {
     if (!targetDate) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -29,20 +33,17 @@ export function useCountdown(targetDate: string | undefined): Countdown {
   useEffect(() => {
     if (!targetDate) return;
 
-    // Update every second
+    // Use a precise interval to sync the countdown
     const timer = setInterval(() => {
-      const nextDelta = calculateDelta();
+      const next = calculateDelta();
       setCountdown((prev) => {
-        // Only update state if values have actually changed (prevents re-renders if called too fast)
-        if (
-          prev.days === nextDelta.days &&
-          prev.hours === nextDelta.hours &&
-          prev.minutes === nextDelta.minutes &&
-          prev.seconds === nextDelta.seconds
-        ) {
-          return prev;
-        }
-        return nextDelta;
+        const hasChanged = 
+          prev.days !== next.days ||
+          prev.hours !== next.hours ||
+          prev.minutes !== next.minutes ||
+          prev.seconds !== next.seconds;
+        
+        return hasChanged ? next : prev;
       });
     }, 1000);
 
